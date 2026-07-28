@@ -206,3 +206,14 @@ em{font-style:italic}
   position:absolute;top:1rem;right:1.4rem;background:none;border:none;
   color:var(--marfim);font-size:2.4rem;cursor:pointer;line-height:1;
 }
+
+/* preço */
+.medida-preco{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2rem,5vw,2.8rem);color:var(--marfim);
+  margin-top:2.2rem;display:grid;gap:.3rem;
+}
+.medida-preco-nota{
+  font-family:var(--sans);font-weight:300;font-size:.85rem;
+  letter-spacing:.08em;color:var(--marfim-fraco);
+}

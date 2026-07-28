@@ -114,6 +114,7 @@
 <section class="secao secao-medida">
   <h2 class="medida-frase">Nenhuma Urutau é igual à outra.<br><span class="grifo">A sua é feita para o seu espaço.</span></h2>
   <p class="medida-apoio">A haste sob medida faz de cada peça um exemplar único — produzido por encomenda, na altura do seu ambiente.</p>
+  <p class="medida-preco">R$ 1.024<span class="medida-preco-nota">produzida sob encomenda, na medida do seu pé-direito</span></p>
 </section>
 
 <!-- 7 · LISTA DE ESPERA -->
@@ -123,7 +124,7 @@
   <p class="lista-apoio centro">Deixe seu contato e seja avisado quando as primeiras unidades do relançamento estiverem disponíveis.</p>
 
   <!-- PASSO 1 -->
-  <form id="form-passo1" class="form" action="https://formspree.io/f/meeynqlr" method="POST">
+  <form id="form-passo1" class="form" action="https://formspree.io/f/SEU_ID_AQUI" method="POST">
     <label>
       <span>Nome</span>
       <input type="text" name="nome" required autocomplete="name">
@@ -132,12 +133,13 @@
       <span>E-mail ou WhatsApp</span>
       <input type="text" name="contato" required autocomplete="email">
     </label>
+    <input type="hidden" name="origem" class="campo-origem" value="direto">
     <input type="hidden" name="_subject" value="Urutau — lista de espera">
     <button class="botao" type="submit">Quero ser avisado</button>
   </form>
 
   <!-- PASSO 2 (opcional) -->
-  <form id="form-passo2" class="form oculto" action="https://formspree.io/f/meeynqlr" method="POST">
+  <form id="form-passo2" class="form oculto" action="https://formspree.io/f/SEU_ID_AQUI" method="POST">
     <p class="form-titulo">Recebido. Quer nos contar sobre o seu espaço? <span class="opcional">(opcional)</span></p>
     <label>
       <span>Pé-direito aproximado (m)</span>
@@ -148,6 +150,7 @@
       <input type="text" name="ambiente" placeholder="sala de estar, hall, quarto…">
     </label>
     <input type="hidden" name="contato_ref" id="contato-ref">
+    <input type="hidden" name="origem" class="campo-origem" value="direto">
     <input type="hidden" name="_subject" value="Urutau — detalhes do espaço">
     <div class="form-acoes">
       <button class="botao" type="submit">Enviar detalhes</button>
@@ -178,12 +181,15 @@
 
 <script>
 (function(){
+  // Origem da visita (ex.: ?utm_source=agencia no QR da vitrine)
+  var origem = new URLSearchParams(location.search).get('utm_source') || 'direto';
+
   var VIDEO = "https://www.youtube.com/embed/FEGh-L22vQg?autoplay=1&rel=0";
   var modal = document.getElementById('modal-video');
   var frame = document.getElementById('video-frame');
 
   function abrir(){ frame.src = VIDEO; modal.classList.remove('oculto'); document.body.style.overflow='hidden';
-    if (typeof gtag==='function') gtag('event','video_open'); }
+    if (typeof gtag==='function') gtag('event','video_open',{origem:origem}); }
   function fechar(){ frame.src=''; modal.classList.add('oculto'); document.body.style.overflow=''; }
 
   document.querySelectorAll('[data-video]').forEach(function(b){ b.addEventListener('click', abrir); });
@@ -192,6 +198,7 @@
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') fechar(); });
 
   // Lista de espera em duas etapas
+  document.querySelectorAll('.campo-origem').forEach(function(c){ c.value = origem; });
   var p1 = document.getElementById('form-passo1');
   var p2 = document.getElementById('form-passo2');
   var fim = document.getElementById('form-fim');
@@ -203,7 +210,7 @@
       .then(function(){ 
         document.getElementById('contato-ref').value = dados.get('contato') || '';
         p1.classList.add('oculto'); p2.classList.remove('oculto');
-        if (typeof gtag==='function') gtag('event','waitlist_step1');
+        if (typeof gtag==='function') gtag('event','waitlist_step1',{origem:origem});
       });
   });
 
@@ -211,12 +218,12 @@
     e.preventDefault();
     fetch(p2.action, {method:'POST', body:new FormData(p2), headers:{'Accept':'application/json'}})
       .then(function(){ p2.classList.add('oculto'); fim.classList.remove('oculto');
-        if (typeof gtag==='function') gtag('event','waitlist_step2'); });
+        if (typeof gtag==='function') gtag('event','waitlist_step2',{origem:origem}); });
   });
 
   document.getElementById('pular').addEventListener('click', function(){
     p2.classList.add('oculto'); fim.classList.remove('oculto');
-    if (typeof gtag==='function') gtag('event','waitlist_skip');
+    if (typeof gtag==='function') gtag('event','waitlist_skip',{origem:origem});
   });
 })();
 </script>
