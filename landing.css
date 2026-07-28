@@ -272,3 +272,7 @@ em{font-style:italic}
 /* vídeo local no modal */
 #video-local{width:100%;max-height:80svh;border-radius:.4rem;background:#000}
 .alma-video{margin-top:1rem;font-size:.75rem;padding:.6rem 1.3rem}
+
+/* dois vídeos da proveniência */
+.alma-video-acoes{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+.alma-video-acoes .alma-video{margin-top:0}

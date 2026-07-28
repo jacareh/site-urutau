@@ -152,7 +152,10 @@
     <div class="alma-item">
       <h3>A proveniência</h3>
       <p>A original. Exibida na Expolux 2018, em São Paulo — a maior feira de iluminação da América Latina.</p>
-      <button class="botao botao-fantasma alma-video" data-video-expolux>Assistir: a Urutau na Expolux ▸</button>
+      <div class="alma-video-acoes">
+        <button class="botao botao-fantasma alma-video" data-video-yt="FEGh-L22vQg">Assistir: a Urutau na Expolux ▸</button>
+        <button class="botao botao-fantasma alma-video" data-video-yt="Lta2GvL4zJ4">Watch in English ▸</button>
+      </div>
     </div>
   </div>
 </section>
@@ -243,16 +246,16 @@
   // Origem da visita (ex.: ?utm_source=agencia no QR da vitrine)
   var origem = new URLSearchParams(location.search).get('utm_source') || 'direto';
 
-  var VIDEO = "https://www.youtube.com/embed/FEGh-L22vQg?autoplay=1&rel=0";
   var modal = document.getElementById('modal-video');
   var frame = document.getElementById('video-frame');
   var local = document.getElementById('video-local');
 
-  function abrirExpolux(){
+  function abrirYouTube(id){
     local.pause(); local.classList.add('oculto');
-    frame.src = VIDEO; frame.classList.remove('oculto');
+    frame.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+    frame.classList.remove('oculto');
     modal.classList.remove('oculto'); document.body.style.overflow='hidden';
-    if (typeof gtag==='function') gtag('event','video_expolux',{origem:origem});
+    if (typeof gtag==='function') gtag('event','video_expolux',{origem:origem, video_id:id});
   }
   function abrirLocal(src, poster, loop, evento){
     frame.src=''; frame.classList.add('oculto');
@@ -263,7 +266,8 @@
   }
   function fechar(){ frame.src=''; local.pause(); modal.classList.add('oculto'); document.body.style.overflow=''; }
 
-  document.querySelectorAll('[data-video-expolux]').forEach(function(b){ b.addEventListener('click', abrirExpolux); });
+  document.querySelectorAll('[data-video-yt]').forEach(function(b){ b.addEventListener('click', function(){
+    abrirYouTube(b.getAttribute('data-video-yt')); }); });
   document.querySelectorAll('[data-video-fogo]').forEach(function(b){ b.addEventListener('click', function(){
     abrirLocal('assets/urutau-fogo-video.mp4','assets/urutau-fogo-real.jpeg',false,'video_fogo'); }); });
   document.querySelectorAll('[data-video-hero]').forEach(function(b){ b.addEventListener('click', function(){
