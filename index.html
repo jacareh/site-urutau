@@ -78,7 +78,7 @@
     <p class="hero-linha">A luz que se apoia no chão e toca o teto.</p>
     <div class="hero-acoes">
       <a class="botao" href="#lista">Entrar na lista de espera</a>
-      <button class="botao botao-fantasma" data-video>Ver a Urutau acesa ▸</button>
+      <button class="botao botao-fantasma" data-video-fogo>Ver a Urutau acesa ▸</button>
     </div>
   </div>
   <a class="hero-seta" href="#gesto" aria-label="Rolar para baixo">↓</a>
@@ -133,7 +133,7 @@
     <h2>LEDs digitais.<br>Cada um, uma cor.</h2>
     <p>Endereçáveis um a um, os LEDs compõem cores, cenas e movimento. Uma noite âmbar e quieta. Um espectro inteiro. A mesma peça, muitos ambientes.</p>
     <p class="luz-chama">Uma das cenas nasceu de fogo de verdade: uma labareda filmada ao vivo, traduzida em uma linha de pixels.</p>
-    <button class="botao botao-fantasma" data-video>Ver em movimento ▸</button>
+    <button class="botao botao-fantasma" data-video-fogo>Ver a cena fogo em movimento ▸</button>
   </div>
 </section>
 
@@ -152,6 +152,7 @@
     <div class="alma-item">
       <h3>A proveniência</h3>
       <p>A original. Exibida na Expolux 2018, em São Paulo — a maior feira de iluminação da América Latina.</p>
+      <button class="botao botao-fantasma alma-video" data-video-expolux>Assistir: a Urutau na Expolux ▸</button>
     </div>
   </div>
 </section>
@@ -230,9 +231,12 @@
 <div class="modal oculto" id="modal-video" role="dialog" aria-modal="true" aria-label="Vídeo da Urutau na Expolux 2018">
   <button class="modal-fechar" id="modal-fechar" aria-label="Fechar vídeo">×</button>
   <div class="modal-caixa">
-    <iframe id="video-frame" src="" title="Urutau Diamond na Expolux 2018"
+    <iframe id="video-frame" src="" title="Urutau Diamond na Expolux 2018" class="oculto"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
+    <video id="video-local" class="oculto" controls playsinline preload="metadata" poster="assets/urutau-fogo-real.jpeg">
+      <source src="assets/urutau-fogo-video.mp4" type="video/mp4">
+    </video>
   </div>
 </div>
 
