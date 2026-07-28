@@ -248,12 +248,24 @@
   var VIDEO = "https://www.youtube.com/embed/FEGh-L22vQg?autoplay=1&rel=0";
   var modal = document.getElementById('modal-video');
   var frame = document.getElementById('video-frame');
+  var local = document.getElementById('video-local');
 
-  function abrir(){ frame.src = VIDEO; modal.classList.remove('oculto'); document.body.style.overflow='hidden';
-    if (typeof gtag==='function') gtag('event','video_open',{origem:origem}); }
-  function fechar(){ frame.src=''; modal.classList.add('oculto'); document.body.style.overflow=''; }
+  function abrirExpolux(){
+    local.pause(); local.classList.add('oculto');
+    frame.src = VIDEO; frame.classList.remove('oculto');
+    modal.classList.remove('oculto'); document.body.style.overflow='hidden';
+    if (typeof gtag==='function') gtag('event','video_expolux',{origem:origem});
+  }
+  function abrirFogo(){
+    frame.src=''; frame.classList.add('oculto');
+    local.classList.remove('oculto'); local.currentTime = 0; local.play();
+    modal.classList.remove('oculto'); document.body.style.overflow='hidden';
+    if (typeof gtag==='function') gtag('event','video_fogo',{origem:origem});
+  }
+  function fechar(){ frame.src=''; local.pause(); modal.classList.add('oculto'); document.body.style.overflow=''; }
 
-  document.querySelectorAll('[data-video]').forEach(function(b){ b.addEventListener('click', abrir); });
+  document.querySelectorAll('[data-video-expolux]').forEach(function(b){ b.addEventListener('click', abrirExpolux); });
+  document.querySelectorAll('[data-video-fogo]').forEach(function(b){ b.addEventListener('click', abrirFogo); });
   document.getElementById('modal-fechar').addEventListener('click', fechar);
   modal.addEventListener('click', function(e){ if(e.target===modal) fechar(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') fechar(); });
@@ -268,7 +280,7 @@
     e.preventDefault();
     var dados = new FormData(p1);
     fetch(p1.action, {method:'POST', body:dados, headers:{'Accept':'application/json'}})
-      .then(function(){ 
+      .then(function(){
         document.getElementById('contato-ref').value = dados.get('contato') || '';
         p1.classList.add('oculto'); p2.classList.remove('oculto');
         if (typeof gtag==='function') gtag('event','waitlist_step1',{origem:origem});
