@@ -78,7 +78,7 @@
     <p class="hero-linha">A luz que se apoia no chão e toca o teto.</p>
     <div class="hero-acoes">
       <a class="botao" href="#lista">Entrar na lista de espera</a>
-      <button class="botao botao-fantasma" data-video-fogo>Ver a Urutau acesa ▸</button>
+      <button class="botao botao-fantasma" data-video-hero>Ver a Urutau acesa ▸</button>
     </div>
   </div>
   <a class="hero-seta" href="#gesto" aria-label="Rolar para baixo">↓</a>
@@ -234,9 +234,7 @@
     <iframe id="video-frame" src="" title="Urutau Diamond na Expolux 2018" class="oculto"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
-    <video id="video-local" class="oculto" controls playsinline preload="metadata" poster="assets/urutau-fogo-real.jpeg">
-      <source src="assets/urutau-fogo-video.mp4" type="video/mp4">
-    </video>
+    <video id="video-local" class="oculto" controls playsinline preload="metadata"></video>
   </div>
 </div>
 
@@ -256,16 +254,20 @@
     modal.classList.remove('oculto'); document.body.style.overflow='hidden';
     if (typeof gtag==='function') gtag('event','video_expolux',{origem:origem});
   }
-  function abrirFogo(){
+  function abrirLocal(src, poster, loop, evento){
     frame.src=''; frame.classList.add('oculto');
+    local.src = src; local.poster = poster; local.loop = loop;
     local.classList.remove('oculto'); local.currentTime = 0; local.play();
     modal.classList.remove('oculto'); document.body.style.overflow='hidden';
-    if (typeof gtag==='function') gtag('event','video_fogo',{origem:origem});
+    if (typeof gtag==='function') gtag('event', evento, {origem:origem});
   }
   function fechar(){ frame.src=''; local.pause(); modal.classList.add('oculto'); document.body.style.overflow=''; }
 
   document.querySelectorAll('[data-video-expolux]').forEach(function(b){ b.addEventListener('click', abrirExpolux); });
-  document.querySelectorAll('[data-video-fogo]').forEach(function(b){ b.addEventListener('click', abrirFogo); });
+  document.querySelectorAll('[data-video-fogo]').forEach(function(b){ b.addEventListener('click', function(){
+    abrirLocal('assets/urutau-fogo-video.mp4','assets/urutau-fogo-real.jpeg',false,'video_fogo'); }); });
+  document.querySelectorAll('[data-video-hero]').forEach(function(b){ b.addEventListener('click', function(){
+    abrirLocal('assets/urutau-hero.mp4','assets/urutau-espectro.jpeg',true,'video_hero'); }); });
   document.getElementById('modal-fechar').addEventListener('click', fechar);
   modal.addEventListener('click', function(e){ if(e.target===modal) fechar(); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') fechar(); });
