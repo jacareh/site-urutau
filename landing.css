@@ -234,3 +234,22 @@ em{font-style:italic}
 .arquitetos-apoio{color:var(--marfim-fraco);max-width:46ch;margin:1.2rem auto 2rem}
 .arquitetos-acoes{margin-bottom:1.4rem}
 .arquitetos-nota{color:rgba(240,234,224,.4);font-size:.85rem}
+
+/* gesto com imagem */
+.gesto-grade{
+  display:grid;grid-template-columns:minmax(240px,420px) 1fr;
+  gap:clamp(2rem,6vw,5rem);align-items:center;
+  max-width:72rem;margin:0 auto;
+}
+.gesto-img{width:100%;border-radius:.4rem}
+.gesto-grade .gesto-frase{text-align:left}
+@media (max-width:760px){
+  .gesto-grade{grid-template-columns:1fr}
+  .gesto-grade .gesto-frase{text-align:center}
+}
+
+/* legenda da cena */
+.luz-legenda{
+  font-size:.72rem;letter-spacing:.1em;color:rgba(240,234,224,.35);
+  margin-top:.6rem;
+}
