@@ -224,3 +224,13 @@ em{font-style:italic}
   color:var(--ambar) !important;border-left:1px solid var(--ambar);
   padding-left:1rem;
 }
+
+/* para arquitetos */
+.secao-arquitetos{background:var(--preto2);text-align:center}
+.arquitetos-titulo{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.9rem,4.5vw,2.8rem);
+}
+.arquitetos-apoio{color:var(--marfim-fraco);max-width:46ch;margin:1.2rem auto 2rem}
+.arquitetos-acoes{margin-bottom:1.4rem}
+.arquitetos-nota{color:rgba(240,234,224,.4);font-size:.85rem}

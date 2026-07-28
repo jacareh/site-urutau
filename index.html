@@ -110,7 +110,7 @@
     </div>
     <div class="alma-item">
       <h3>A proveniência</h3>
-      <p>Exibida na Expolux 2018, em São Paulo — a maior feira de iluminação da América Latina.</p>
+      <p>A original. Exibida na Expolux 2018, em São Paulo — a maior feira de iluminação da América Latina.</p>
     </div>
   </div>
 </section>
@@ -120,6 +120,17 @@
   <h2 class="medida-frase">Nenhuma Urutau é igual à outra.<br><span class="grifo">A sua é feita para o seu espaço.</span></h2>
   <p class="medida-apoio">A haste sob medida faz de cada peça um exemplar único — produzido por encomenda, na altura do seu ambiente.</p>
   <p class="medida-preco">R$ 1.024<span class="medida-preco-nota">produzida sob encomenda, na medida do seu pé-direito</span></p>
+</section>
+
+<!-- 6b · PARA ARQUITETOS -->
+<section class="secao secao-arquitetos">
+  <p class="eyebrow centro">Para arquitetos e projetistas</p>
+  <h2 class="centro arquitetos-titulo">A Urutau existe em 3D.</h2>
+  <p class="arquitetos-apoio centro">Baixe o modelo no 3D Warehouse e experimente a linha de luz no seu projeto — do chão ao teto do pé-direito, como ela será fabricada.</p>
+  <div class="arquitetos-acoes">
+    <a class="botao botao-fantasma" href="https://3dwarehouse.sketchup.com/model/24d3beb7-bed4-41e2-a071-24166b4fd551/Luminaria-Urutau" target="_blank" rel="noopener" id="link-3d">Baixar o modelo 3D ↗</a>
+  </div>
+  <p class="arquitetos-nota centro">Especificação sob medida para o seu projeto: fale conosco pela lista de espera.</p>
 </section>
 
 <!-- 7 · LISTA DE ESPERA -->
@@ -171,7 +182,7 @@
 <footer class="rodape">
   <p>URUTAU <em>Diamond</em> · design autoral brasileiro</p>
   <p class="rodape-credito">Trilha: “Berimbau Blues” — Dinho Nascimento</p>
-  <p class="rodape-legal">Imagens: registro da Expolux 2018. Componentes eletrônicos modernizados no relançamento.</p>
+  <p class="rodape-legal">A original — Expolux 2018. Imagens: registro da época. Componentes eletrônicos modernizados no relançamento.</p>
 </footer>
 
 <!-- MODAL DE VÍDEO -->
@@ -229,6 +240,11 @@
   document.getElementById('pular').addEventListener('click', function(){
     p2.classList.add('oculto'); fim.classList.remove('oculto');
     if (typeof gtag==='function') gtag('event','waitlist_skip',{origem:origem});
+  });
+
+  var l3d = document.getElementById('link-3d');
+  if (l3d) l3d.addEventListener('click', function(){
+    if (typeof gtag==='function') gtag('event','model3d_click',{origem:origem});
   });
 })();
 </script>
